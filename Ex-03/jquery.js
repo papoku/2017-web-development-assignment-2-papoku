@@ -5,7 +5,7 @@ var lines;
 var shape;
 var coord = [];
 var info_window;
-
+var gtfs;
 
                     
 // funtion to load google map
@@ -18,10 +18,13 @@ function initMap() {
         });   
       }  
 
+
 //Function to load all the lines into the input
 $(document).ready(function(){
     
-    $.getJSON("http://data.foli.fi/gtfs/v0/20171130-162538/routes", function(json){
+    latest_gtfs();
+    
+    $.getJSON("https://data.foli.fi/gtfs/v0/"+gtfs+"/routes", function(json){
             
             lines = json;
             $('#bus-line').empty();
@@ -69,6 +72,26 @@ $(document).ready(function(){
 });
 
 
+//Function to find latest GTFS
+function latest_gtfs(){
+$.ajax({
+            async: false,
+            url: "https://data.foli.fi/gtfs/",
+            success: function(json) {
+                
+                gtfs = json.latest;       
+                //console.log(gtfs);
+            },
+                //if query fails
+            error: function(xhr, textStatus, errorThrown){
+                alert('Something is wrong, Server is not responding !');
+    }
+        });
+    
+}
+
+
+
 // Function to find route id for a line
 function find_route_id(){
     
@@ -78,7 +101,7 @@ function find_route_id(){
          if(document.getElementById('area').value.trim() == obj.route_short_name){
             
             route_id = obj.route_id;
-             console.log(route_id);
+             //console.log(route_id);
             }
      });
     
@@ -93,13 +116,13 @@ function find_route_id(){
 function get_shape(){
     
     $.ajax({
-        url: "http://data.foli.fi/gtfs/v0/20171130-162538/trips/route/"+route_id,
+        url: "https://data.foli.fi/gtfs/v0/"+gtfs+"/trips/route/"+route_id,
         async: false,
         dataType: 'json',
         success: function(json) {
             
             shape = json[0].shape_id.trim();
-           console.log(shape);
+           //console.log(shape);
         }
     });   
     
@@ -108,7 +131,7 @@ function get_shape(){
 // return driving routes coordinates and mark in the map
 function get_tripid(){
      
-    $.getJSON("http://data.foli.fi/gtfs/v0/20171130-162538/shapes/"+ shape, function(json){
+    $.getJSON("https://data.foli.fi/gtfs/v0/"+gtfs+"/shapes/"+ shape, function(json){
         
         var coordinates =[];
         
@@ -118,6 +141,7 @@ function get_tripid(){
                  
                                     }); 
         
+        //console.log(coordinates.length+" cd");
         initMap();
         
     // draw polylines according to the coordinates
@@ -154,22 +178,28 @@ function show_buses(){
     // retrieve live coordinates of vehicle and show in map
         $.ajax({
             async: false,
-            url: "http://data.foli.fi/siri/vm",
+            url: "https://data.foli.fi/siri/vm",
             success: function(json) {
                 
+                var status=0;
                 $.each(json.result.vehicles, function(i, obj){
                     
                     if(document.getElementById('area').value.trim() == obj.publishedlinename){
 
                     //mark coordinates in map            
                          addMarker(new google.maps.LatLng(obj.latitude, obj.longitude), "Line <b>"+obj.publishedlinename+"</b>");
-                        
+                        status =1;
 
 
-                    }    
+                    }
                 
                 });        
                 
+                if(!status){
+                    
+                    alert("Sorry!! No buses anymore in this route.");
+                    status =0;
+                }
             },
                 //if query fails
             error: function(xhr, textStatus, errorThrown){

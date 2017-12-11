@@ -37,7 +37,7 @@ $(document).ready(function(){
         
        
     // load location information from Zippopotam API
-        $.get( "http://www.zippopotam.us/" + country + "/" + ZipCode, function(data, status){
+        $.get( "https://www.zippopotam.us/" + country + "/" + ZipCode, function(data, status){
            
             var table = document.getElementById("json-response");
             
