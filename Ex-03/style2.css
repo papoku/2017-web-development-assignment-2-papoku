@@ -1,0 +1,81 @@
+
+* {
+    box-sizing: border-box;
+    
+}
+.header, .footer {
+    padding: 5px;
+    background-color: #517e9f;
+    color: white;
+    
+}
+
+
+.header::after {
+    content: "";
+    clear: both;
+    display: table;
+    }
+
+
+.clrfix{
+    
+    margin-top: 20px;
+    margin: 25px auto;
+    width: 80%;
+    font-family: sans-serif;
+    font-size: 20px;
+    
+}
+
+.clrfix::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+
+#map {
+    //border: 2px solid red;
+    width: 80%;
+    //margin: auto;
+    margin: 25px auto;
+    height: 400px;
+}
+
+#map::after {
+    content: "";
+    clear: both;
+    display: table;
+    
+}
+
+.button{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    //border: 5px solid red;
+    margin-top: 5px;
+
+}
+
+.foli {
+    
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+
+@media (max-width:800px) {
+  #history {
+    width:100%;/*Extending width to 100%, if the viewport is smaller or equal to 800px */
+      margin: auto;
+    }
+    
+    .form-input{
+
+    width: 100%;
+        }   
+}
