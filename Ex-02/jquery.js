@@ -1,5 +1,10 @@
 var map;
 
+// Clear localstorage only for once in the opening of a window.
+$(document).one('ready', function () {
+   localStorage.clear();
+ });
+
 
 // funtion to load google map
 function initMap() {
@@ -78,7 +83,7 @@ $(document).ready(function(){
 });
 
 
-// function to load last searched country and Zip from localstorage
+// function to store successful location info in localstorage
 function StoreHistory(country, zip ){
     
     if(typeof(Storage) !== "undefined") {
@@ -92,7 +97,7 @@ function StoreHistory(country, zip ){
     
 }
 
-// function to store successful location info in localstorage
+// function to load last searched country and Zip from localstorage
 function ShowHistory(){
     if(localStorage.length != 0){
         
