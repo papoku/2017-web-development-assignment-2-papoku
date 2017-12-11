@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style2.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="script.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+<script src="jquery.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="header">                <!-- Navigation div starts -->
+    <div class="inside_header">
+<nav class="nav_bar">
+    
+<a href="/html/">File</a> |
+<a href="/css/">Edit</a> |
+<a href="/js/">View</a> |
+<a href="/jquery/">Help</a>
+</nav>
+        </div>
+</div>                      <!-- Navigation div end -->
+
+    
+    
+<div class="clrfix">        <!-- Clearfixing for virtual code div -->
+    <form>
+
+  <div class="virtual-code">        <!-- div starts for virtual code -->
+     Virtual code:
+      <input id="virtaul-barcode" name="barcode" type="text" onblur="makeblur(this.id)" onfocus="background_color(this.id)" style="height:30px; font-size: 20px"><br>
+      <button id="dcode" class="decode" type="button" onclick="" style="height:25px; font-size: 17px">Decode</button>
+  </div>
+
+    </form>
+</div>                      <!--  end of Clearfixing for virtual code div -->
+    
+    
+    <div class="client-info">       <!-- Container div for client information -->
+        
+        <div class="Hide-button">
+        <button id="btn_hide" class="hide" type="button" style="height:25px; font-size: 17px"> Hide </button>
+            </div>
+        
+        <div id="centre_div" class="centre">        <!-- container clearfixing div for all client's row divs -->
+    
+        <div class="form-raw">      <!-- div that show client info in raw -->
+    
+            <div class="form-txt">Payee's IBAN: </div>
+      
+            <div id="input_iban" class="form-input"><input id="iban" type="text"></div>
+    
+    
+            <div class="form-txt">Amount To Be Paid:</div>
+      
+            <div class="form-input"><input id="amount" type="text"></div>
+            
+        </div>
+        
+        
+        <div class="form-raw">
+    
+            <div class="form-txt">Payment Reference:</div>
+      
+            <div class="form-input"><input id="ref" type="text"> </div>
+            
+    
+            <div class="form-txt"> Due Date: </div>
+      
+            <div class="form-input"><input id="date" type="text" ></div>
+        
+        </div>
+            
+            </div>
+        
+        <div class="canvas">
+            <canvas id="cnvas"></canvas>
+                
+        </div> 
+    </div>
+
+    
+    
+    
+    
+
+<div class="footer">
+  <p>Add text for footer</p>
+</div>
+
+</body>
+</html>
