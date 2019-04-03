@@ -1,4 +1,4 @@
-Turku city bus service mapping to find out the route and realtiem location of buses in google map.
+Turku city bus service mapping to find out the route and realtiem location of buses in google map..
 https://it-teaching-abo-akademi.github.io/2017-web-development-assignment-2-papoku/Ex-03/Foli.html
 
 Zip code mapping ..
